@@ -1,0 +1,106 @@
+{
+  "json_array": [
+    {
+      "music_title": "Locked Away",
+      "music_composer": "Rustie",
+      "music_image": "https://dummyimage.com/300x300/7dab52/cc6c8b.png?text=",
+      "music_date": "1987-11-14"
+    },
+    {
+      "music_title": "Omen",
+      "music_composer": "Carla Morrison",
+      "music_image": "https://dummyimage.com/300x300/43d8c3/0b0b59.png?text=",
+      "music_date": "1986-03-22"
+    },
+    {
+      "music_title": "Aftertaste",
+      "music_composer": "Velcro Mary",
+      "music_image": "https://dummyimage.com/300x300/8202a4/2f6472.png?text=",
+      "music_date": "1988-06-27"
+    },
+    {
+      "music_title": "Drowning Shadows",
+      "music_composer": "Redneck Souljers",
+      "music_image": "https://dummyimage.com/300x300/7ed3aa/abe9b7.png?text=",
+      "music_date": "1961-10-02"
+    },
+    {
+      "music_title": "Throwaways",
+      "music_composer": "Major Lazer",
+      "music_image": "https://dummyimage.com/300x300/a3b417/9e4e22.png?text=",
+      "music_date": "1971-10-28"
+    },
+    {
+      "music_title": "With the Shyts",
+      "music_composer": "Justin Bieber",
+      "music_image": "https://dummyimage.com/300x300/73581e/0a690b.png?text=",
+      "music_date": "2004-02-20"
+    },
+    {
+      "music_title": "Rolling in the Deep",
+      "music_composer": "Andrew Combs",
+      "music_image": "https://dummyimage.com/300x300/5516bd/684483.png?text=",
+      "music_date": "1975-06-03"
+    },
+    {
+      "music_title": "Come Get Her",
+      "music_composer": "Geographer",
+      "music_image": "https://dummyimage.com/300x300/d47b92/05c326.png?text=",
+      "music_date": "1983-07-20"
+    },
+    {
+      "music_title": "New Americana",
+      "music_composer": "Courtney Barnett",
+      "music_image": "https://dummyimage.com/300x300/d21499/69459b.png?text=",
+      "music_date": "1979-03-24"
+    },
+    {
+      "music_title": "Drink You Away",
+      "music_composer": "Ellie Goulding",
+      "music_image": "https://dummyimage.com/300x300/96ff1f/075dcb.png?text=",
+      "music_date": "1993-03-16"
+    },
+    {
+      "music_title": "Sorry",
+      "music_composer": "Andrew Combs",
+      "music_image": "https://dummyimage.com/300x300/e1ae7f/240a70.png?text=",
+      "music_date": "1961-01-06"
+    },
+    {
+      "music_title": "Lean On",
+      "music_composer": "Margot & The Nuclear So and So's",
+      "music_image": "https://dummyimage.com/300x300/4d96cc/83d4a0.png?text=",
+      "music_date": "1978-11-29"
+    },
+    {
+      "music_title": "Bird Set Free",
+      "music_composer": "Velcro Mary",
+      "music_image": "https://dummyimage.com/300x300/162b41/13affc.png?text=",
+      "music_date": "1963-01-05"
+    },
+    {
+      "music_title": "Let It Happen",
+      "music_composer": "Sara Groves",
+      "music_image": "https://dummyimage.com/300x300/b95417/8a45cc.png?text=",
+      "music_date": "1996-06-10"
+    },
+    {
+      "music_title": "Come Get Her",
+      "music_composer": "Demi Lovato",
+      "music_image": "https://dummyimage.com/300x300/1f459d/4df0db.png?text=",
+      "music_date": "1991-12-02"
+    },
+    {
+      "music_title": "Same Old Love",
+      "music_composer": "Doug Benson",
+      "music_image": "https://dummyimage.com/300x300/c20f93/1a4489.png?text=",
+      "music_date": "1975-05-07"
+    },
+    {
+      "music_title": "Another Lonely Night",
+      "music_composer": "Floating Points",
+      "music_image": "https://dummyimage.com/300x300/89562b/22f353.png?text=",
+      "music_date": "1973-06-03"
+    }
+  ]
+}
