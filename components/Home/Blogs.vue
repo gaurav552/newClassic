@@ -19,7 +19,7 @@ try {
         <v-card title="Recent Blogs" variant="tonal" color="red-darken-4" rounded="0"
                 class="rounded-t-xl"></v-card>
 
-        <div class="overflow-auto" style="height: calc(100% - 66px - 55px)">
+        <div class="overflow-auto pa-3" style="height: calc(100% - 66px - 55px)">
 
             <v-data-iterator :items="allItems" :page="page" :items-per-page="perPage"
                              :items-length="allItems.length">
@@ -28,14 +28,14 @@ try {
                         v-for="(item, i) in items"
                         :key="i"
                     >
-                        <v-card rounded="0" variant="flat" class="pb-2" hover>
+                        <v-card variant="flat" class="pb-2 mb-4 rounded-lg bg-myBase" hover>
                             <v-img
                                 class="align-end text-white"
                                 :lazy-src="item.raw.blog_image"
                                 :src="item.raw.blog_image"
                                 cover
                                 gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                                height="200"
+                                height="200px"
                             >
                                 <v-card-title>{{item.raw.blog_title}}</v-card-title>
                             </v-img>

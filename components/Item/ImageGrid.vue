@@ -49,7 +49,7 @@ const result = generateRandomArray();
 <template>
     <v-row>
         <v-col v-for="(mus,imgIdx) in compositions" :key="imgIdx" :cols="compColLen[imgIdx]">
-            <v-card class="rounded-xl" hover link to="/music/composers/composer-12312">
+            <v-card class="rounded-xl" hover link to="/music/compositions/composition-12312">
                 <v-img
                     :src="mus.music_image"
                     :lazy-src="mus.music_image"

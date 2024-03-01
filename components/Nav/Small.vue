@@ -7,7 +7,36 @@ function toggleTheme() {
     theme.global.name.value = theme.global.current.value.dark ? 'myLightTheme' : 'myDarkTheme'
 }
 
-let {paths} = useFetchNav()
+const paths = ref([])
+
+try {
+    const {paths:nav} = useFetchNav()
+    paths.value = nav
+} catch (e) {
+
+}
+
+const path = ref(route.currentRoute.value.fullPath);
+
+watch( () => route.currentRoute.value.fullPath, (newVal, oldVal) => {
+        const {paths:nav} = useFetchNav()
+        paths.value = nav
+    }
+);
+
+
+
+function pathHasNav(path) {
+    let fullPath = route.currentRoute.value.fullPath
+    let subHome = ['/blogs', '/about', '/contact', '/support']
+    if(fullPath.split('/').length > 2){ // these represent path that are in any nav object other than home
+        return fullPath.includes(path) && path.length > 1
+    }
+
+    if(subHome.indexOf(fullPath) != -1){ // these path lies in home object, whose path is '/' i.e. length 1
+        return fullPath.includes(path) && path.length == 1
+    }
+}
 
 </script>
 
@@ -27,12 +56,7 @@ let {paths} = useFetchNav()
 
             <div class="d-flex justify-center flex-column h-100">
                 <v-list density="comfortable" lines="two">
-
-                    <v-list-item v-for="path in paths" :to="path.Path" :prepend-icon="path.Icon" link :title="path.Name" class="mb-3"></v-list-item>
-
-                    <v-divider></v-divider>
-                    <v-list-item prepend-icon="mdi-format-paint" link title="Change theme"
-                                 class="mt-3"></v-list-item>
+                    <v-list-item v-for="path in paths" :to="path.Path" :prepend-icon="path.Icon" link :title="path.Name" :active="pathHasNav(path.Path)" class="mb-3"></v-list-item>
                 </v-list>
             </div>
 

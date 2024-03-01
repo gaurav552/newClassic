@@ -3,13 +3,18 @@ const route = useRouter()
 const {paths} = useFetchNav()
 
 const path = ref(findObjectByPath(paths, route.currentRoute.value.fullPath));
-
-watch(
-    () => route.currentRoute.value.fullPath,
-    (newPath) => {
-        path.value = findObjectByPath(paths, newPath);
+let show = ref(true)
+watch(() => route.currentRoute.value.fullPath, (newVal, oldVal) => {
+    if(newVal != oldVal) {
+        path.value = findObjectByPath(paths, newVal)
+        show.value = false
+        setTimeout(()=>{
+            show.value = true
+        }, 200)
     }
-);
+})
+
+
 
 function findObjectByPath(objArray:any, searchPath:any):any {
     for (const obj of objArray) {
@@ -40,14 +45,20 @@ function findObjectByPath(objArray:any, searchPath:any):any {
 
     return objectFound;
 }
-String.prototype.count=function(c) {
-    var result = 0, i = 0;
-    for(i;i<this.length;i++)if(this[i]==c)result++;
-    return result;
-};
+
+let navActive = computed(() => {
+
+})
+
 function pathHasSubNav(path) {
     let fullPath = route.currentRoute.value.fullPath
-    return fullPath.includes(path) && path.split('/').length > 2
+    if(fullPath.split('/').length > 3){
+        return fullPath.includes(path) && path.split('/').length >= 3
+    }
+    if(fullPath.includes('/blogs/')){
+        return path.includes('/blogs')
+    }
+
 }
 </script>
 
@@ -61,7 +72,7 @@ function pathHasSubNav(path) {
 
         <div class="d-flex justify-center flex-column h-100">
             <v-list density="comfortable" lines="one">
-                <v-list-item v-for="subPath in path.SubNav" :to="subPath.Path" :title="subPath.Name" :value="subPath.Name" :class="pathHasSubNav(subPath.Path) ? 'v-list-item--active' : ''" class="mb-2 ml-2 px-5 py-3"></v-list-item>
+                <v-list-item v-for="subPath in path.SubNav" :to="subPath.Path" :title="subPath.Name" :value="subPath.Name" :active="pathHasSubNav(subPath.Path)" class="mb-2 ml-2 px-5 py-3"></v-list-item>
             </v-list>
         </div>
     </v-navigation-drawer>
