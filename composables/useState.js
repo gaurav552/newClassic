@@ -1,0 +1,5 @@
+export const pageHeadline = () => useState('headline', () => '')
+export const pageSubHeadline = () => useState('subHeadline', () => '')
+export const pageBackRoute = () => useState('back-route', () => '')
+export const pageIcon = () => useState('page-Icon', () => '')
+export const pageBreadCrumbs = () => useState('page-crumbs', () => [])

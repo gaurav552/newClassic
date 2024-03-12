@@ -1,20 +1,16 @@
 <script setup lang="ts">
-    import {useTheme} from "vuetify";
-
-    const prop =defineProps({
-        cardData:Object
-    })
-
-    const theme = useTheme()
+defineProps({
+    cardData: Object
+})
 
 </script>
 
 <template>
-    <v-card link :to="cardData.path" class="rounded-xl h-50">
+    <v-card link :to="cardData.path" hover class="rounded-xl h-50">
         <v-img
             :src="`${cardData.image}`"
             :lazy-src="`${cardData.image}`"
-            class="text-right align-end pb-10 pr-10 h-100"
+            class="text-right align-end pb-10 pr-10 h-100 rounded-xl"
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             cover
             position="center"
@@ -38,8 +34,5 @@
 </template>
 
 <style scoped>
-.v-card{
-    box-shadow: var(--v-myCardElevation)!important;
-}
 
 </style>

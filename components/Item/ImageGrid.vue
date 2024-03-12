@@ -3,24 +3,31 @@
 let compositions = ref()
 let compColLen = ref([])
 let lastValue = ref();
+
+defineProps({
+    masonry: Boolean
+})
+
 function generateRandomArray() {
     const possibilities = [
         [7, 5],
         [5, 7],
         [4, 8],
         [8, 4],
+        [6, 6],
         [4, 4, 4]
         // Add more possible combinations as needed
     ];
 
-    let randomIndex = Math.floor(Math.random() * possibilities.length);
+    let randomIndex = -1;
     let value = null;
-    if(lastValue.value == randomIndex) {
-        value = generateRandomArray()
-    } else {
-        lastValue.value = randomIndex;
-        value = possibilities[randomIndex]
-    }
+
+    do{
+        randomIndex = Math.floor(Math.random() * possibilities.length);
+    } while(lastValue.value == randomIndex)
+
+    lastValue.value = randomIndex;
+    value = possibilities[randomIndex]
 
     return value;
 }
@@ -41,15 +48,13 @@ try {
 }
 
 const result = generateRandomArray();
-//
-// console.table(result)
-// console.table(result)
+
 </script>
 
 <template>
     <v-row>
-        <v-col v-for="(mus,imgIdx) in compositions" :key="imgIdx" :cols="compColLen[imgIdx]">
-            <v-card class="rounded-xl" hover link to="/music/compositions/composition-12312">
+        <v-col v-for="(mus,imgIdx) in compositions" :key="imgIdx" :cols="masonry ? compColLen[imgIdx] : 6">
+            <v-card class="rounded-xl" hover link to="/music/composers/composer-12312">
                 <v-img
                     :src="mus.music_image"
                     :lazy-src="mus.music_image"
@@ -81,6 +86,6 @@ const result = generateRandomArray();
 
 <style scoped>
 .v-card{
-    box-shadow: var(--v-myCardElevation)!important;
+    //box-shadow: var(--v-myCardElevation)!important;
 }
 </style>

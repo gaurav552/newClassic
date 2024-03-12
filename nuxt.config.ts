@@ -4,7 +4,7 @@ import vuetify, {transformAssetUrls} from 'vite-plugin-vuetify'
 export default defineNuxtConfig({
     devtools: {enabled: true},
     modules: [
-        "@nuxtjs/strapi", 'vue3-carousel-nuxt',
+        'vue3-carousel-nuxt','@nuxtjs/sanity',
         (_options, nuxt) => {
             nuxt.hooks.hook('vite:extendConfig', (config) => {
                 // @ts-expect-error
@@ -14,10 +14,6 @@ export default defineNuxtConfig({
     ],
     carousel: {
         prefix: 'GG'
-    },
-    strapi: {
-        version: 'v4',
-        prefix: '/api'
     },
     build: {
         transpile: ['vuetify'],
@@ -29,4 +25,8 @@ export default defineNuxtConfig({
             },
         },
     },
+    sanity: {
+        projectId: '21zn3zr3',
+        useCdn: true
+    }
 })

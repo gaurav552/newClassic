@@ -21,54 +21,6 @@ let cardInfo = [
     }
 ]
 
-let currentSlide = ref(0)
-
-const years = ref([
-    {
-        color: 'cyan',
-        year: '1960',
-    },
-    {
-        color: 'green',
-        year: '1970',
-    },
-    {
-        color: 'pink',
-        year: '1980',
-    },
-    {
-        color: 'amber',
-        year: '1990',
-    },
-    {
-        color: 'orange',
-        year: '2000',
-    },
-    {
-        color: 'amber',
-        year: '1990',
-    },
-    {
-        color: 'amber',
-        year: '1990',
-    },
-    {
-        color: 'amber',
-        year: '1990',
-    },
-    {
-        color: 'amber',
-        year: '1990',
-    },
-    {
-        color: 'amber',
-        year: '1990',
-    },
-    {
-        color: 'amber',
-        year: '1990',
-    },
-])
 
 </script>
 
