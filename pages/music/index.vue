@@ -1,5 +1,8 @@
 <script setup lang="ts">
 
+let {data:sanityComposers} = await fetchSanityComposers()
+let composers = sanityComposers.value
+
 let headline = pageHeadline()
 let subHeadline = pageSubHeadline()
 let pgIcon = pageIcon()
@@ -8,7 +11,7 @@ let crumbs = pageBreadCrumbs()
 
 let breadCrumbs = [{name:'Home',path:'/'},{name:'Music',path:'/music'}]
 
-headline.value = 'Classical Music Home'
+headline.value = 'Classical Music'
 subHeadline.value = 'Dive into the world of classical music, composers, and musicians.'
 pgIcon.value = 'mdi-music-clef-treble'
 back.value = '/'

@@ -5,7 +5,11 @@ let subHeadline = pageSubHeadline()
 let pgIcon = pageIcon()
 let back = pageBackRoute()
 
-
+watch(()=>headline.value, (newVal) =>{
+    useHead({
+        title:headline.value
+    })
+})
 
 </script>
 

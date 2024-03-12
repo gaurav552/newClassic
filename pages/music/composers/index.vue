@@ -1,21 +1,21 @@
 <script setup lang="ts">
 
-    let {data:sanityComposers} = await fetchSanityComposers()
-    let composers = sanityComposers.value
+let {data:sanityComposers} = await fetchSanityComposers()
+let composers = sanityComposers.value
 
-    let headline = pageHeadline()
-    let subHeadline = pageSubHeadline()
-    let pgIcon = pageIcon()
-    let back = pageBackRoute()
-    let crumbs = pageBreadCrumbs()
+let headline = pageHeadline()
+let subHeadline = pageSubHeadline()
+let pgIcon = pageIcon()
+let back = pageBackRoute()
+let crumbs = pageBreadCrumbs()
 
-    let breadCrumbs = [{name:'Home',path:'/'},{name:'Music',path:'/music'}, {name:'Composers',path:'/music/composers'}]
+let breadCrumbs = [{name:'Home',path:'/'},{name:'Music',path:'/music'}, {name:'Composers',path:'/music/composers'}]
 
-    headline.value = 'Composers Home'
-    subHeadline.value = 'View all classical composers their music and facts about their life.'
-    pgIcon.value = 'mdi-music-clef-treble'
-    back.value = '/music'
-    crumbs.value = breadCrumbs
+headline.value = 'Composers Home'
+subHeadline.value = 'View all classical composers their music and facts about their life.'
+pgIcon.value = 'mdi-music-clef-treble'
+back.value = '/music'
+crumbs.value = breadCrumbs
 </script>
 
 <template>

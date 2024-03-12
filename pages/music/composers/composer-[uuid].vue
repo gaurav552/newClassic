@@ -22,8 +22,6 @@ pgIcon.value = 'mdi-music-clef-treble'
 back.value = '/music/composers'
 crumbs.value = breadCrumbs
 
-
-
 </script>
 
 <template>
