@@ -8,13 +8,8 @@ try {
     console.log(e)
 }
 let currentSlide = ref(0)
+const {clipTextWithEllipsis} = useUtilities()
 
-function clipTextWithEllipsis(text, maxLength) {
-    if (text.length > maxLength) {
-        return text.slice(0, maxLength - 3) + '...';
-    }
-    return text;
-}
 </script>
 
 <template>

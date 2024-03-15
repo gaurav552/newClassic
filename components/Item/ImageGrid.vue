@@ -1,63 +1,38 @@
 <script setup lang="ts">
 
 let compositions = ref()
-let compColLen = ref([])
+let compColLen = ref<Number[]>([])
 let lastValue = ref();
 
-defineProps({
-    masonry: Boolean
+const props = defineProps({
+    masonry: Boolean,
+    people:Array<Object>,
+    work:Array<Object>
 })
 
-function generateRandomArray() {
-    const possibilities = [
-        [7, 5],
-        [5, 7],
-        [4, 8],
-        [8, 4],
-        [6, 6],
-        [4, 4, 4]
-        // Add more possible combinations as needed
-    ];
+let {shuffleArrays, getYear, nameFormatter, generateRandomArr} = useUtilities()
 
-    let randomIndex = -1;
-    let value = null;
+let mixed = shuffleArrays(props.people, props.work)
 
-    do{
-        randomIndex = Math.floor(Math.random() * possibilities.length);
-    } while(lastValue.value == randomIndex)
-
-    lastValue.value = randomIndex;
-    value = possibilities[randomIndex]
-
-    return value;
+for (let i = 0; i < mixed.length ; i ++) {
+    let {value:cols, randomIndex} = generateRandomArr(lastValue.value)
+    lastValue.value = randomIndex
+    cols.forEach((val:number) => {
+        compColLen.value.push(val)
+    })
+    i+= (cols.length - 1)
 }
 
-try {
-    const {musics} = await useFetchMusic()
-    compositions.value = musics
-
-    for (let i = 0; i < compositions.value.length ; i ++) {
-        let cols = generateRandomArray()
-        cols.forEach(function(val) {
-            compColLen.value.push(val)
-        })
-        i+= (cols.length - 1)
-    }
-} catch (e) {
-
-}
-
-const result = generateRandomArray();
 
 </script>
 
 <template>
     <v-row>
-        <v-col v-for="(mus,imgIdx) in compositions" :key="imgIdx" :cols="masonry ? compColLen[imgIdx] : 6">
-            <v-card class="rounded-xl" hover link to="/music/composers/composer-12312">
+        <v-col v-for="(value,imgIdx) in mixed" :key="imgIdx" :cols="masonry ? compColLen[imgIdx] : 6">
+            <v-card class="rounded-xl" hover link :to="`/music/${value.year ? 'compositions/composition-' : 'composers/composer-'}${value._id}`">
                 <v-img
-                    :src="mus.music_image"
-                    :lazy-src="mus.music_image"
+                    :src="value.year ? value.person.mainImage : value.mainImage"
+                    :lazy-src="value.year ? value.person.mainImage : value.mainImage"
                     cover
                     height="350px"
                     gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
@@ -66,15 +41,16 @@ const result = generateRandomArray();
                     <div class="d-flex w-100 align-end pa-4">
                         <div class="left w-66">
                             <v-card-title>
-                                {{ mus.music_title }}
+                                {{ value.year ? (value.altName ? value.altName : value.name) : value.name }}
                             </v-card-title>
 
                             <v-card-subtitle>
-                                {{mus.music_composer}}
+                                {{value.year ? value.person.lastName : `${getYear(value.dateOfBirth)} - ${getYear(value.dateOfDeath)}`}}
                             </v-card-subtitle>
                         </div>
-                        <div class="right w-33 text-right px-4 py-2">
-                            <h3>{{mus.music_date.slice(0, 4)}}</h3>
+                        <div class="right w-33 text-right py-2 d-flex align-center justify-end">
+                            <v-btn icon="mdi-heart-outline" size="small" variant="text"></v-btn>
+                            <span class="text-subtitle-2">2K likes</span>
                         </div>
                     </div>
                 </v-img>

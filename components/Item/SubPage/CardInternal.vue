@@ -5,21 +5,7 @@ defineProps(
     }
 )
 
-function nameFormatter(firstName:string, lastName:string) {
-    let fullName = `${firstName} ${lastName}`
-    if(fullName.length > 20){
-        const parts = fullName.split(' ');
-        const shortenedFirstName = parts[0].charAt(0) + '.';
-        const shortenedMiddleName = parts.length > 2 ? ' ' + parts[1].charAt(0) + '.' : '';
-        const lastName = parts[parts.length - 1];
-
-        fullName = `${shortenedFirstName}${shortenedMiddleName} ${lastName}`
-    }
-    return fullName
-}
-function getYear(date: string) {
-    return date.split('-')[0]
-}
+const {getYear,nameFormatter} = useUtilities()
 
 </script>
 

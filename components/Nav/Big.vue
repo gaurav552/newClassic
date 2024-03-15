@@ -46,9 +46,6 @@ function findObjectByPath(objArray:any, searchPath:any):any {
     return objectFound;
 }
 
-let navActive = computed(() => {
-
-})
 
 function pathHasSubNav(path) {
     let fullPath = route.currentRoute.value.fullPath

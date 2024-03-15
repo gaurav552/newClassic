@@ -25,11 +25,11 @@ watch(()=>headline.value, (newVal) =>{
                 <v-sheet elevation="1" class="px-6 py-8 rounded-b-xl d-flex flex-column ga-3 align-start bg-mySurface elevation-2 titleSheet text-red-darken-4">
                     <div class="d-flex align-center ga-4 w-100" style="z-index: 1">
                         <v-icon :icon="pgIcon ? pgIcon : 'mdi-music-clef-treble'" color="red-darken-4" size="60"></v-icon>
-                        <div class="d-flex flex-column text-red-darken-4 w-75">
+                        <div class="d-flex flex-column text-red-darken-4 w-66">
                             <h2>{{ headline ? headline : 'Classical Music' }}</h2>
                             <p class="text-subtitle-2">{{ subHeadline ? subHeadline : 'Dive into the world of classical music' }}</p>
                         </div>
-                        <div v-if="back" class="d-flex flex-column ga-1 w-25 align-end">
+                        <div v-if="back" class="d-flex flex-column ga-1 w-33 align-end">
                             <v-btn prepend-icon="mdi-arrow-left-thin" variant="text" hover link :to="back ? back : '/music'">
                                 Back
                             </v-btn>
@@ -38,7 +38,7 @@ watch(()=>headline.value, (newVal) =>{
                     </div>
                 </v-sheet>
 
-                <slot/>
+                <slot></slot>
 
             </div>
         </v-main>
