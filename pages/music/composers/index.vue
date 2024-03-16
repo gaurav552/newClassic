@@ -56,30 +56,7 @@ crumbs.value = breadCrumbs
         </div>
     </div>
 
-    <v-card variant="tonal" color="red-darken-4" elevation="1" class="rounded-lg px-9 py-5 bg-mySurface">
-        <v-text-field
-            label="Search Composers"
-            append-inner-icon="mdi-magnify"
-            single-line
-            hide-details
-            density="compact"
-        >
-            <template v-slot:append>
-                <v-btn variant="tonal">
-                    <v-icon icon="mdi-filter-variant" start></v-icon>
-
-                    Sort By
-                    <v-menu activator="parent">
-                        <v-list>
-                            <v-list-item link><v-list-item-title>Composer Name</v-list-item-title></v-list-item>
-                            <v-list-item link><v-list-item-title>Composed Age</v-list-item-title></v-list-item>
-                            <v-list-item active link><v-list-item-title>Composer Popularity</v-list-item-title></v-list-item>
-                        </v-list>
-                    </v-menu>
-                </v-btn>
-            </template>
-        </v-text-field>
-    </v-card>
+    <SearchField label="Search composers" />
 
     <div class="bottom w-100">
         <ItemImageGrid :masonry="false"/>

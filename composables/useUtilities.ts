@@ -1,10 +1,11 @@
 export const useUtilities = () => {
     function getYear(date: string) {
-        return date.split('-')[0]
+        return date ? date.split('-')[0] : '';
     }
 
     function shuffleArrays(array1:Array<Object>, array2:Array<Object>) {
         // Combine the arrays
+        if(!array1 || !array2) return [];
         const combinedArray = array1.concat(array2);
 
         // Fisher-Yates shuffle algorithm

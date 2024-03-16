@@ -20,6 +20,50 @@ export const composerEditorPickQuery = () => useState('composer-editor-pick', ()
     }`
 )
 
+export const musicEditorPicksQuery = () => useState('music-editor-pick', () =>
+    groq`{
+        "composers":*[_type == "composers" && editorPick == true]{
+            "name":firstName +" "+lastName,
+            mainImage,
+            excerpt,
+            dateOfBirth,
+            dateOfDeath,
+            _id,
+        },
+        "compositions":*[_type == "compositions" && editorPick == true]{
+            name,
+            altName,
+            "person":composerName->{mainImage, firstName, lastName},
+            year,
+            "len":length,
+            _id,
+        }
+    }
+    `
+)
+
+export const musicFeaturedQuery = () => useState('music-editor-pick', () =>
+    groq`{
+        "composers":*[_type == "composers" && editorPick == false && featured == true]{
+            "name":firstName +" "+lastName,
+            mainImage,
+            excerpt,
+            dateOfBirth,
+            dateOfDeath,
+            _id,
+        },
+        "compositions":*[_type == "compositions" editorPick == false && featured == true]{
+            name,
+            altName,
+            "person":composerName->{mainImage, firstName, lastName},
+            year,
+            "len":length,
+            _id,
+        }
+    }
+    `
+)
+
 export const composerFeaturedQuery = () => useState('composer-editor-pick', () =>
     groq`*[_type == "composers" && editorPick == false && featured == true]{
         "name":firstName +" "+lastName,
@@ -53,3 +97,21 @@ export const compositionFeaturedQuery = () => useState('composition-editor-pick'
     }`
 )
 
+export const searchSortMusic= () => useState('music-sort', () => [
+    {
+        name: 'Composer Name',
+        value: 'composerName'
+    },
+    {
+        name: 'Composer Date',
+        value: 'composerDate'
+    },
+    {
+        name: 'Composition Name',
+        value: 'compositionName'
+    },
+    {
+        name: 'Composition Date',
+        value: 'compositionDate'
+    },
+])
