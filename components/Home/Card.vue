@@ -27,7 +27,7 @@ defineProps({
                     ></v-progress-circular>
                 </v-row>
             </template>
-            <v-card-title :class="`text-white text-h2 text-teal-darken-1`"
+            <v-card-title :class="`text-white text-h2  text-${cardData.color}`"
                           style="letter-spacing: 3px!important" v-text="cardData.title"></v-card-title>
         </v-img>
     </v-card>

@@ -21,7 +21,7 @@ crumbs.value = breadCrumbs
 <template>
     <div class="top w-100 d-flex flex-column ga-4 align-start">
 
-        <v-card color="red-darken-4" variant="tonal" class="rounded-t-xl pa-2 w-100" elevation="1" title="Featured Composers"></v-card>
+        <v-card class="rounded-t-xl pa-2 w-100 bg-mySurface text-myColor" elevation="1" title="Featured Composers"></v-card>
 
         <div class="d-flex w-100 ga-4">
             <v-card height="600px" hover style="width: calc(75%)" link :to="`/music/composers/composer-${composers[2]._id}`">

@@ -35,8 +35,8 @@ const handleSearchClose = () => {
 
 <template>
     <div class="top w-100" style="height: 30%">
-        <v-card color="red-darken-4" variant="tonal" class="rounded-t-xl pa-2 w-100 mb-3" elevation="1" title="Editor picks"></v-card>
-        <v-sheet class="bg-myBase rounded">
+        <v-card class="rounded-t-xl pa-2 w-100 mb-3 bg-mySurface text-myColor" elevation="1" title="Editor picks"></v-card>
+        <v-sheet class="bg-myBase rounded-xl">
             <CarouselFull :people="editorPicks.composers" :works="editorPicks.compositions" people-name="Composer" work-name="Composition" />
         </v-sheet>
     </div>

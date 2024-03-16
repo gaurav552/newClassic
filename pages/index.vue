@@ -7,17 +7,20 @@ let cardInfo = [
     {
         image: '/_nuxt/assets/beethoven.jpeg',
         title: 'Music',
-        path: '/music'
+        path: '/music',
+        color:'red-lighten-1'
     },
     {
         image: '/_nuxt/assets/vangogh.jpg',
         title: 'Art',
-        path: '/art'
+        path: '/art',
+        color: 'teal-lighten-1'
     },
     {
         image: '/_nuxt/assets/dosto.jpg',
         title: 'Literature',
-        path: '/literature'
+        path: '/literature',
+        color: 'indigo-lighten-1'
     }
 ]
 

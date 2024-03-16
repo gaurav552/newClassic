@@ -22,10 +22,10 @@ watch(()=>headline.value, (newVal) =>{
 
         <v-main class="d-flex align-start justify-center bg-myBase" style="min-height: 300px;">
             <div class="d-flex flex-column px-10 pb-10 ga-10 w-100 justify-start" style="max-width: 1400px;">
-                <v-sheet elevation="1" class="px-6 py-8 rounded-b-xl d-flex flex-column ga-3 align-start bg-mySurface elevation-2 titleSheet text-red-darken-4">
+                <v-sheet elevation="1" class="px-6 py-8 rounded-b-xl d-flex flex-column ga-3 align-start bg-mySurface elevation-2 titleSheet text-myColor">
                     <div class="d-flex align-center ga-4 w-100" style="z-index: 1">
                         <v-icon :icon="pgIcon ? pgIcon : 'mdi-music-clef-treble'" color="red-darken-4" size="60"></v-icon>
-                        <div class="d-flex flex-column text-red-darken-4 w-66">
+                        <div class="d-flex flex-column text-myColor w-66">
                             <h2>{{ headline ? headline : 'Classical Music' }}</h2>
                             <p class="text-subtitle-2">{{ subHeadline ? subHeadline : 'Dive into the world of classical music' }}</p>
                         </div>
@@ -46,23 +46,5 @@ watch(()=>headline.value, (newVal) =>{
 </template>
 
 <style scoped>
-.titleSheet{
-    background: transparent;
-    position: relative;
-}
-
-.titleSheet::after{
-    content: '';
-    background: currentColor;
-    opacity: var(--v-activated-opacity);
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    position: absolute;
-    border: inherit;
-    border-radius: inherit;
-    z-index: 0;
-}
 
 </style>

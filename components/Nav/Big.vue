@@ -69,7 +69,14 @@ function pathHasSubNav(path) {
 
         <div class="d-flex justify-center flex-column h-100">
             <v-list density="comfortable" lines="one">
-                <v-list-item v-for="subPath in path.SubNav" :to="subPath.Path" :title="subPath.Name" :value="subPath.Name" :active="pathHasSubNav(subPath.Path)" class="mb-2 ml-2 px-5 py-3"></v-list-item>
+                <v-list-item
+                    v-for="subPath in path.SubNav"
+                    :to="subPath.Path"
+                    :title="subPath.Name"
+                    :value="subPath.Name"
+                    active-class="custom-active-class"
+                    :active="pathHasSubNav(subPath.Path)"
+                    class="mb-2 ml-2 pl-7 pr-2 py-3"></v-list-item>
             </v-list>
         </div>
     </v-navigation-drawer>
@@ -79,8 +86,33 @@ function pathHasSubNav(path) {
 .v-navigation-drawer{
     box-shadow: var(--v-mySideBarElevation)!important;
 }
+
 .v-list-item{
-    border-top-left-radius: 24px !important;
-    border-bottom-left-radius: 24px !important;
+    --v-activated-opacity: 0;
+    --v-hover-opacity: 0;
+    position: relative;
+    color: var(--v-theme-myColor);
 }
+.v-list-item:after{
+    content: " ";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 10px;
+    top: 50%;
+    background: currentColor;
+    transform: translateY(-50%);
+    opacity: 0;
+    left: 8px;
+}
+.v-list-item:hover:after{
+    opacity: 1;
+}
+.custom-active-class{
+    color: red;
+}
+.custom-active-class:after{
+    opacity: 1;
+}
+
 </style>

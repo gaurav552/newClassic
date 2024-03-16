@@ -24,8 +24,6 @@ watch( () => route.currentRoute.value.fullPath, (newVal, oldVal) => {
     }
 );
 
-
-
 function pathHasNav(path) {
     let fullPath = route.currentRoute.value.fullPath
     let subHome = ['/blogs', '/about', '/contact', '/support']
@@ -56,7 +54,15 @@ function pathHasNav(path) {
 
             <div class="d-flex justify-center flex-column h-100">
                 <v-list density="comfortable" lines="two">
-                    <v-list-item v-for="path in paths" :to="path.Path" :prepend-icon="path.Icon" link :title="path.Name" :active="pathHasNav(path.Path)" class="mb-3"></v-list-item>
+                    <v-list-item
+                        v-for="path in paths"
+                        :to="path.Path"
+                        :prepend-icon="path.Icon"
+                        link
+                        :title="path.Name"
+                        :active="pathHasNav(path.Path)"
+                        active-class="custom-active-class"
+                        class="mb-3"></v-list-item>
                 </v-list>
             </div>
 
@@ -75,5 +81,19 @@ function pathHasNav(path) {
 <style scoped>
 .v-navigation-drawer{
     box-shadow: var(--v-mySideBarElevation)!important;
+}
+.v-list-item{
+    --v-activated-opacity: 0;
+    --v-hover-opacity: 0;
+    position: relative;
+    color: var(--v-theme-myColor);
+    border-left: 2px solid transparent;
+}
+.v-list-item:hover{
+    border-left: 2px solid currentColor;
+}
+.custom-active-class{
+    color: red;
+    border-left: 2px solid currentColor;
 }
 </style>

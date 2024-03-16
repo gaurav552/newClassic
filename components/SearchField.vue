@@ -37,18 +37,17 @@ let handleSearchKeyChange = async (value:string) => {
 </script>
 
 <template>
-    <v-card variant="tonal" color="red-darken-4" elevation="1" class="rounded-lg px-9 py-5 bg-mySurface">
+    <v-card variant="tonal" color="mySurface" elevation="1" class="rounded-lg px-9 py-5 bg-mySurface">
         <v-text-field
             :label="label"
             append-inner-icon="mdi-magnify"
             single-line
             hide-details
             density="compact"
-            class="rounded-xl"
+            class="rounded-xl text-myColor"
             v-model="searchKey"
             @keyup="handleSearchKeyChange(searchKey)"
             :loading="loading"
-            color="red-darken-3"
         >
             <template v-slot:append>
                 <v-btn variant="tonal">
@@ -56,7 +55,7 @@ let handleSearchKeyChange = async (value:string) => {
 
                     Sort By
                     <v-menu activator="parent" :close-on-content-click="false">
-                        <v-list color="red-darken-2">
+                        <v-list>
                             <v-list-item
                                 @click="handleSortSelection(sorter.value)"
                                 :active="sorter.value == currentSelected"
