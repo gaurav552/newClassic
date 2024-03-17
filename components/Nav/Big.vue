@@ -76,7 +76,7 @@ function pathHasSubNav(path) {
                     :value="subPath.Name"
                     active-class="custom-active-class"
                     :active="pathHasSubNav(subPath.Path)"
-                    class="mb-2 ml-2 pl-7 pr-2 py-3"></v-list-item>
+                    class="mb-2 ml-2 pl-7 pr-2 py-3 text-myColor"></v-list-item>
             </v-list>
         </div>
     </v-navigation-drawer>
@@ -92,6 +92,7 @@ function pathHasSubNav(path) {
     --v-hover-opacity: 0;
     position: relative;
     color: var(--v-theme-myColor);
+    transition: color 0.2s ease-in-out;
 }
 .v-list-item:after{
     content: " ";
@@ -105,11 +106,14 @@ function pathHasSubNav(path) {
     opacity: 0;
     left: 8px;
 }
+.v-list-item:not(.custom-active-class):hover{
+    color: var(--v-theme-myColorDeeper)!important;
+}
 .v-list-item:hover:after{
     opacity: 1;
 }
 .custom-active-class{
-    color: red;
+    color: red!important;
 }
 .custom-active-class:after{
     opacity: 1;

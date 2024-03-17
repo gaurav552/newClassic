@@ -64,6 +64,31 @@ export const musicFeaturedQuery = () => useState('music-editor-pick', () =>
     `
 )
 
+export const musicSearchQuery = () => useState('music-search-query', () =>
+    groq`{
+        "composers": *[_type == 'composers' && [firstName, lastName, excerpt] match $search] | order(firstName, dateOfBirth)
+        {
+            "name":firstName +" "+lastName,
+            firstName,
+            lastName,
+            mainImage,
+            excerpt,
+            dateOfBirth,
+            dateOfDeath,
+            _id,
+        },
+        "compositions": *[_type == 'compositions' && [name, altName, compositionKey, description, movements, composerName->lastName, composerName->firstName] match $search ] | order(composerName->firstName, altName, name)
+        {
+            name,
+            altName,
+            "person":composerName->{mainImage, firstName, lastName},
+            year,
+            "len":length,
+            _id,
+        }
+    }`
+)
+
 export const composerFeaturedQuery = () => useState('composer-editor-pick', () =>
     groq`*[_type == "composers" && editorPick == false && featured == true]{
         "name":firstName +" "+lastName,

@@ -52,7 +52,7 @@ function pathHasNav(path) {
 
             <v-divider></v-divider>
 
-            <div class="d-flex justify-center flex-column h-100">
+            <div class="d-flex justify-center flex-column h-100 naver">
                 <v-list density="comfortable" lines="two">
                     <v-list-item
                         v-for="path in paths"
@@ -62,7 +62,7 @@ function pathHasNav(path) {
                         :title="path.Name"
                         :active="pathHasNav(path.Path)"
                         active-class="custom-active-class"
-                        class="mb-3"></v-list-item>
+                        class="mb-3 text-myColor"></v-list-item>
                 </v-list>
             </div>
 
@@ -79,21 +79,27 @@ function pathHasNav(path) {
 </template>
 
 <style scoped>
+
 .v-navigation-drawer{
     box-shadow: var(--v-mySideBarElevation)!important;
 }
-.v-list-item{
+.naver .v-list-item{
     --v-activated-opacity: 0;
     --v-hover-opacity: 0;
     position: relative;
-    color: var(--v-theme-myColor);
-    border-left: 2px solid transparent;
+    border-left: 3px solid transparent;
+    transition: border-left 0.2s ease-in-out, color 0.2s ease-in-out;
 }
-.v-list-item:hover{
-    border-left: 2px solid currentColor;
+.naver .v-list-item:hover{
+    border-left-color: var(--v-theme-myColorDeeper)!important;
+    border-left-style: solid;
+    border-left-width: 3px;
 }
-.custom-active-class{
-    color: red;
-    border-left: 2px solid currentColor;
+.naver .custom-active-class{
+    color: red!important;
+    border-left: 3px solid currentColor;
+}
+.naver .v-list-item:not(.custom-active-class):hover{
+    color: var(--v-theme-myColorDeeperOP)!important;
 }
 </style>

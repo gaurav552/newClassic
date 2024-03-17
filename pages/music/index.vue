@@ -23,11 +23,9 @@ let sortList = searchSortMusic()
 
 const handleSearch = (data:Array<object>) => {
     searching.value = true
-    searchResult.value = data
 }
 
 const handleSearchClose = () => {
-    searchResult.value = []
     searching.value = false
 }
 
@@ -36,21 +34,15 @@ const handleSearchClose = () => {
 <template>
     <div class="top w-100" style="height: 30%">
         <v-card class="rounded-t-xl pa-2 w-100 mb-3 bg-mySurface text-myColor" elevation="1" title="Editor picks"></v-card>
-        <v-sheet class="bg-myBase rounded-xl">
+        <v-sheet class="bg-myBase rounded-b-xl topCarousel elevation-2 overflow-hidden">
             <CarouselFull :people="editorPicks.composers" :works="editorPicks.compositions" people-name="Composer" work-name="Composition" />
         </v-sheet>
     </div>
 
-    <div class="mid">
-        <SearchField label="Search composers and compositions" sort-default="composerName" :sort-list="sortList" @search-results="handleSearch" @search-close="handleSearchClose" />
-    </div>
+    <SearchField label="Search composers and compositions" sort-default="composerName" :sort-list="sortList" @searching="searching = true" @search-close="searching = false" />
 
-    <div class="bottom w-100">
-        <ItemImageGrid v-if="!searching" :people="featuredPicks.composers" :work="featuredPicks.compositions" :masonry="true"/>
-        <template v-else>
-            <ItemImageGrid v-if="searchResult.composers.length > 0 || searchResult.compositions.length > 0" :people="searchResult.composers" :work="searchResult.compositions" :masonry="true"></ItemImageGrid>
-            <v-alert variant="tonal" color="error" v-else text="No matching result found for the search term"></v-alert>
-        </template>
+    <div v-if="!searching" class="bottom w-100">
+        <ItemImageGrid :people="featuredPicks.composers" :work="featuredPicks.compositions" :masonry="true"/>
     </div>
 
     <div class="blogList d-flex flex-column rounded-xl">
