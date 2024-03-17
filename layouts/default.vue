@@ -21,8 +21,8 @@ watch(()=>headline.value, (newVal) =>{
         <NavFooter/>
 
         <v-main class="d-flex align-start justify-center bg-myBase" style="min-height: 300px;">
-            <div class="d-flex flex-column px-10 pb-10 ga-10 w-100 justify-start" style="max-width: 1400px;">
-                <v-sheet elevation="1" class="px-6 py-8 rounded-b-xl d-flex flex-column ga-3 align-start bg-mySurface elevation-2 titleSheet text-myColor">
+            <div class="d-flex flex-column px-10 pb-10 ga-10 w-100 justify-start v-container" style="max-width: 1400px;padding-top: 165px">
+                <v-sheet elevation="1" class="px-6 py-8 rounded-b-xl d-flex flex-column ga-3 align-start elevation-2 titleSheet text-myColor">
                     <div class="d-flex align-center ga-4 w-100" style="z-index: 1">
                         <v-icon :icon="pgIcon ? pgIcon : 'mdi-music-clef-treble'" color="red-darken-4" size="60"></v-icon>
                         <div class="d-flex flex-column text-myColor w-66">
@@ -46,5 +46,19 @@ watch(()=>headline.value, (newVal) =>{
 </template>
 
 <style scoped>
+.v-container{
+    position: relative;
+}
+.titleSheet{
+    position: fixed;
+    top:0;
+    width: calc(1400px - 80px);
+    z-index: 999;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    box-shadow: inset 0 0 0 200px rgba(255,255,255,0.08);
 
+    background-color: var(--v-surface2);
+    backdrop-filter: blur(5px);
+}
 </style>

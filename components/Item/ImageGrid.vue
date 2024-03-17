@@ -11,7 +11,7 @@ const props = defineProps({
     shuffle:Boolean
 })
 
-let {shuffleArrays, getYear, nameFormatter, generateRandomArr, mixArrays} = useUtilities()
+let {getYear, generateRandomArr, mixArrays} = useUtilities()
 
 let mixed = mixArrays(props.people, props.work)
 
