@@ -6,7 +6,7 @@ let props = defineProps({
     sortDefault:String,
     sortList: Array<Object>
 })
-let currentSelected = ref(props.sortDefault)
+let currentSelected = ref<string>(props.sortDefault??'')
 let currentDirection = ref('asc')
 
 let emit = defineEmits(['searchResults', 'searchClose', 'searching'])
@@ -32,7 +32,13 @@ let searchMgs = ref({msg: '', status: ''})
 let handleSearchKeyChange = async (value:string) => {
     loading.value = value.length > 3
     if(value.length > 3) {
-        const {data} = await sanityPaginatedSearch(musicSearchQuery().value,value+"*", 'Error fetching searched result')
+
+        let sortVal = {
+            sort1: currentSelected.value == 'name' ? 'firstName' : 'dateOfBirth',
+            sort2: currentSelected.value == 'name' ? 'name': 'year'
+        }
+
+        const {data} = await sanityPaginatedSearch(musicSearchQuery().value,value+"*",sortVal, currentDirection.value, 'Error fetching searched result')
         emit('searching')
         loading.value = false
         searching.value = true
@@ -98,7 +104,7 @@ let handleSearchKeyChange = async (value:string) => {
                 v-if="searchMgs.status == 'success'"
                 :people="searchResults.composers"
                 :work="searchResults.compositions"
-                :masonry="true"
+                :masonry="false"
             ></ItemImageGrid>
         </div>
     </div>

@@ -66,7 +66,7 @@ export const musicFeaturedQuery = () => useState('music-editor-pick', () =>
 
 export const musicSearchQuery = () => useState('music-search-query', () =>
     groq`{
-        "composers": *[_type == 'composers' && [firstName, lastName, excerpt] match $search] | order(firstName, dateOfBirth)
+        "composers": *[_type == 'composers' && [firstName, lastName, excerpt] match $search] | order($sort1 asc)
         {
             "name":firstName +" "+lastName,
             firstName,
@@ -77,7 +77,7 @@ export const musicSearchQuery = () => useState('music-search-query', () =>
             dateOfDeath,
             _id,
         },
-        "compositions": *[_type == 'compositions' && [name, altName, compositionKey, description, movements, composerName->lastName, composerName->firstName] match $search ] | order(composerName->firstName, altName, name)
+        "compositions": *[_type == 'compositions' && [name, altName, compositionKey, description, movements, composerName->lastName, composerName->firstName] match $search ] | order($sort2 asc, itemNumber asc)
         {
             name,
             altName,
@@ -124,19 +124,11 @@ export const compositionFeaturedQuery = () => useState('composition-editor-pick'
 
 export const searchSortMusic= () => useState('music-sort', () => [
     {
-        name: 'Composer Name',
-        value: 'composerName'
+        name: 'Name',
+        value: 'name'
     },
     {
-        name: 'Composer Date',
-        value: 'composerDate'
-    },
-    {
-        name: 'Composition Name',
-        value: 'compositionName'
-    },
-    {
-        name: 'Composition Date',
-        value: 'compositionDate'
-    },
+        name: 'Date',
+        value: 'date'
+    }
 ])

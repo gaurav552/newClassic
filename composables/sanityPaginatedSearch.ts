@@ -1,6 +1,10 @@
-export default async (query: string,searchKey:string, errorMsg:string) => {
+export default async (query: string, searchKey:string, sort:object, sortDirection: string, errorMsg:string) => {
 
-    const { data, error } = await useSanityQuery(query, {search:searchKey})
+    if(sortDirection !== 'asc'){
+        query = query.replaceAll('asc', 'desc')
+    }
+
+    const { data, error } = await useSanityQuery(query, {search:searchKey, sort1: sort.sort1, sort2: sort.sort2})
 
     if(error.value){
         throw createError({

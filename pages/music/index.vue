@@ -17,17 +17,8 @@ pgIcon.value = 'mdi-music-clef-treble'
 back.value = '/'
 crumbs.value = breadCrumbs
 let searching = ref(false)
-let searchResult =ref<object[]>([])
 
 let sortList = searchSortMusic()
-
-const handleSearch = (data:Array<object>) => {
-    searching.value = true
-}
-
-const handleSearchClose = () => {
-    searching.value = false
-}
 
 </script>
 
@@ -39,7 +30,7 @@ const handleSearchClose = () => {
         </v-sheet>
     </div>
 
-    <SearchField label="Search composers and compositions" sort-default="composerName" :sort-list="sortList" @searching="searching = true" @search-close="searching = false" />
+    <SearchField label="Search composers and compositions" sort-default="name" :sort-list="sortList" @searching="searching = true" @search-close="searching = false" />
 
     <div v-if="!searching" class="bottom w-100">
         <ItemImageGrid :people="featuredPicks.composers" :work="featuredPicks.compositions" :masonry="true"/>

@@ -60,11 +60,26 @@ export const useUtilities = () => {
         return text;
     }
 
+    function mixArrays(arr1:Array<object>, arr2:Array<object>) {
+        const result = [];
+        const maxLength = Math.max(arr1.length, arr2.length);
+        for (let i = 0; i < maxLength; i++) {
+            if (i < arr1.length) {
+                result.push(arr1[i]);
+            }
+            if (i < arr2.length) {
+                result.push(arr2[i]);
+            }
+        }
+        return result;
+    }
+
     return {
         getYear,
         shuffleArrays,
         nameFormatter,
         clipTextWithEllipsis,
-        generateRandomArr
+        generateRandomArr,
+        mixArrays
     }
 }

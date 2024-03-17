@@ -7,12 +7,13 @@ let lastValue = ref();
 const props = defineProps({
     masonry: Boolean,
     people:Array<Object>,
-    work:Array<Object>
+    work:Array<Object>,
+    shuffle:Boolean
 })
 
-let {shuffleArrays, getYear, nameFormatter, generateRandomArr} = useUtilities()
+let {shuffleArrays, getYear, nameFormatter, generateRandomArr, mixArrays} = useUtilities()
 
-let mixed = shuffleArrays(props.people, props.work)
+let mixed = mixArrays(props.people, props.work)
 
 for (let i = 0; i < mixed.length ; i ++) {
     let {value:cols, randomIndex} = generateRandomArr(lastValue.value)
