@@ -17,17 +17,26 @@ export const useUtilities = () => {
         return combinedArray;
     }
 
-    function nameFormatter(firstName:string, lastName:string) {
-        let fullName = `${firstName} ${lastName}`
-        if(fullName.length > 20){
+    /**
+     * Formats the given first and last names into a shortened full name if the total length is over 20 characters.
+     * @param {string} firstName - The first name.
+     * @param {string} lastName - The last name.
+     * @returns {string} The formatted full name.
+     */
+    function nameFormatter(firstName: string, lastName: string): string {
+        let fullName = `${firstName} ${lastName}`;
+
+        // Shorten the full name if it's over 20 characters
+        if (fullName.length > 20) {
             const parts = fullName.split(' ');
             const shortenedFirstName = parts[0].charAt(0) + '.';
             const shortenedMiddleName = parts.length > 2 ? ' ' + parts[1].charAt(0) + '.' : '';
-            const lastName = parts[parts.length - 1];
+            const finalLastName = parts[parts.length - 1];
 
-            fullName = `${shortenedFirstName}${shortenedMiddleName} ${lastName}`
+            fullName = `${shortenedFirstName}${shortenedMiddleName} ${finalLastName}`;
         }
-        return fullName
+
+        return fullName;
     }
 
     function generateRandomArr(lastValue:number) {
@@ -62,14 +71,11 @@ export const useUtilities = () => {
 
     function mixArrays(arr1:Array<object>, arr2:Array<object>) {
         const result = [];
-        const maxLength = Math.max(arr1.length, arr2.length);
-        for (let i = 0; i < maxLength; i++) {
-            if (i < arr1.length) {
-                result.push(arr1[i]);
-            }
-            if (i < arr2.length) {
-                result.push(arr2[i]);
-            }
+        for (let i = 0; i < arr1.length; i++) {
+            result.push(arr1[i]);
+        }
+        for (let i = 0; i < arr2.length; i++) {
+            result.push(arr2[i]);
         }
         return result;
     }

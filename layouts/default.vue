@@ -53,12 +53,10 @@ watch(()=>headline.value, (newVal) =>{
     position: fixed;
     top:0;
     width: calc(1400px - 80px);
-    z-index: 999;
+    z-index: 99999;
     -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
     box-shadow: inset 0 0 0 200px rgba(255,255,255,0.08);
-
     background-color: var(--v-surface2);
-    backdrop-filter: blur(5px);
 }
 </style>

@@ -1,7 +1,13 @@
 <script setup lang="ts">
 
-let {data:sanityComposers} = await fetchSanityComposers()
-let composers = sanityComposers.value
+let query = composerFeaturedQuery().value
+query = query.replace('&& editorPick == false', '')
+let {data} = await sanityFetchLimited(query, 'Could not fetch composer')
+let featuredPicks = data.value
+
+query = query.replace(' && featured == true', '')
+let {data:data2} = await sanityFetchLimited(query, 'Could not fetch composers')
+let allComposers = data2.value
 
 let headline = pageHeadline()
 let subHeadline = pageSubHeadline()
@@ -16,50 +22,33 @@ subHeadline.value = 'View all classical composers their music and facts about th
 pgIcon.value = 'mdi-music-clef-treble'
 back.value = '/music'
 crumbs.value = breadCrumbs
+
+let searching = ref(false)
+let sortList = searchSortMusic()
+let searchQuery = composerSearchQuery().value
+
 </script>
 
 <template>
     <div class="top w-100 d-flex flex-column ga-4 align-start">
 
         <v-card class="rounded-t-xl pa-2 w-100 bg-mySurface text-myColor" elevation="1" title="Featured Composers"></v-card>
+        <ItemHomeGrid :featured-picks="featuredPicks" />
 
-        <div class="d-flex w-100 ga-4">
-            <v-card height="600px" hover style="width: calc(75%)" link :to="`/music/composers/composer-${composers[2]._id}`">
-                <ItemSubPageCardInternal :composer="composers[2]" />
-            </v-card>
-
-            <div class="d-flex flex-column ga-4" height="600px" style="width: calc(25% - 10px)">
-                <v-card hover height="190px" link :to="`/music/composers/composer-${composers[2]._id}`">
-                    <ItemSubPageCardInternal :composer="composers[1]" />
-                </v-card>
-                <v-card hover height="190px" link :to="`/music/composers/composer-${composers[0]._id}`">
-                    <ItemSubPageCardInternal :composer="composers[0]" />
-                </v-card>
-                <v-card hover height="190px" link :to="`/music/composers/composer-${composers[3]._id}`">
-                    <ItemSubPageCardInternal :composer="composers[3]" />
-                </v-card>
-            </div>
-        </div>
-        <div class="d-flex w-100 ga-4">
-            <v-card height="190px" hover class="w-25" link :to="`/music/composers/composer-${composers[4]._id}`">
-                <ItemSubPageCardInternal :composer="composers[4]" />
-            </v-card>
-            <v-card height="190px" hover class="w-25" link :to="`/music/composers/composer-${composers[5]._id}`">
-                <ItemSubPageCardInternal :composer="composers[5]" />
-            </v-card>
-            <v-card height="190px" hover class="w-25" link :to="`/music/composers/composer-${composers[6]._id}`">
-                <ItemSubPageCardInternal :composer="composers[6]" />
-            </v-card>
-            <v-card height="190px" hover class="w-25" link :to="`/music/composers/composer-${composers[7]._id}`">
-                <ItemSubPageCardInternal :composer="composers[7]" />
-            </v-card>
-        </div>
     </div>
 
-    <SearchField label="Search composers" />
+    <SearchField
+        label="Search composers"
+        sort-default="name"
+        :sort-list="sortList"
+        @searching="searching = true"
+        @search-close="searching = false"
+        :search-query="searchQuery"
+        :searching-multiple="false"
+    />
 
-    <div class="bottom w-100">
-        <ItemImageGrid :masonry="false"/>
+    <div v-if="!searching" class="bottom w-100">
+        <ItemImageGrid :masonry="false" :work="[]" :people="allComposers"/>
     </div>
 
     <div class="blogList d-flex flex-column rounded-xl">

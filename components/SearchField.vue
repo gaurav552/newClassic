@@ -4,7 +4,9 @@
 let props = defineProps({
     label: String,
     sortDefault:String,
-    sortList: Array<Object>
+    sortList: Array<Object>,
+    searchQuery: String,
+    searchingMultiple: Boolean
 })
 let currentSelected = ref<string>(props.sortDefault??'')
 let currentDirection = ref('asc')
@@ -38,19 +40,23 @@ let handleSearchKeyChange = async (value:string) => {
             sort2: currentSelected.value == 'name' ? 'name': 'year'
         }
 
-        const {data} = await sanityPaginatedSearch(musicSearchQuery().value,value+"*",sortVal, currentDirection.value, 'Error fetching searched result')
+        const {data} = await sanityPaginatedSearch(props.searchQuery??'',value+"*",sortVal, currentDirection.value, 'Error fetching searched result')
         emit('searching')
         loading.value = false
         searching.value = true
         searchResults.value = data.value
-        if(searchResults.value.composers.length > 0 || searchResults.value.compositions.length > 0) {
-            let total = searchResults.value.composers.length + searchResults.value.compositions.length
-            searchMgs.value.msg = `Found ${total} result for search term '${value}'`
-            searchMgs.value.status = 'success'
-        } else {
-            searchMgs.value.msg = `Found 0 result for search term '${value}'`
-            searchMgs.value.status = 'error'
-        }
+
+        const totalResults = props.searchingMultiple ?
+            searchResults.value.composers.length + searchResults.value.compositions.length :
+            searchResults.value.length;
+
+        const successMessage = totalResults > 0 ?
+            `Found ${totalResults} result${totalResults > 1 ? 's' : ''} for search term '${value}'` :
+            `Found 0 result for search term '${value}'`;
+
+        searchMgs.value.msg = successMessage;
+        searchMgs.value.status = totalResults > 0 ? 'success' : 'error';
+
     } else {
         emit('searchClose')
         searching.value = false
@@ -102,8 +108,8 @@ let handleSearchKeyChange = async (value:string) => {
             <v-alert class="mb-8" variant="tonal" :color="searchMgs.status" :text="searchMgs.msg"></v-alert>
             <ItemImageGrid
                 v-if="searchMgs.status == 'success'"
-                :people="searchResults.composers"
-                :work="searchResults.compositions"
+                :people="searchingMultiple ? searchResults.composers : searchResults"
+                :work="searchingMultiple ? searchResults.compositions : []"
                 :masonry="false"
             ></ItemImageGrid>
         </div>

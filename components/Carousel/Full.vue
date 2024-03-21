@@ -1,8 +1,14 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 const props = defineProps({
-    people:Array<Object>,
-    works:Array<Object>,
+    people:{
+        type:Array<Object>,
+        required: true
+    },
+    works:{
+        type:Array<Object>,
+        required: true
+    },
     peopleName:String,
     workName: String
 })
@@ -31,7 +37,7 @@ onMounted(() => {
                 class="h-100 w-100 text-white rounded-b-xl text-left bg-mySurface"
                 variant="flat"
             >
-                <v-img
+                <v-parallax
                     :src="slide.year ? slide.person.mainImage : slide.mainImage"
                     :lazy-src="slide.year ? slide.person.mainImage : slide.mainImage"
                     class="rounded px-4 py-5 mb-3 h-100"
@@ -39,7 +45,7 @@ onMounted(() => {
                     gradient="to top, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)"
                 >
                     <v-card-title class="text-grey-lighten-1">{{ slide.year ? workName : peopleName }}</v-card-title>
-                </v-img>
+                </v-parallax>
                 <div class="px-5 pb-6 d-flex justify-space-between align-center text-myColor">
                     <div>
                         <v-card-title class="name" @click="handleClick(slide)" v-if="slide.year">
@@ -75,4 +81,9 @@ onMounted(() => {
 .v-card:hover .name{
     color:#B71C1C ;
 }
+
+.v-parallax img{
+    object-position: bottom;
+}
+
 </style>

@@ -89,9 +89,25 @@ export const musicSearchQuery = () => useState('music-search-query', () =>
     }`
 )
 
-export const composerFeaturedQuery = () => useState('composer-editor-pick', () =>
-    groq`*[_type == "composers" && editorPick == false && featured == true]{
+export const composerSearchQuery = () => useState('composer-search-query', () =>
+    groq`*[_type == 'composers' && [firstName, lastName, excerpt] match $search] | order($sort1 asc)
+    {
         "name":firstName +" "+lastName,
+        firstName,
+        lastName,
+        mainImage,
+        excerpt,
+        dateOfBirth,
+        dateOfDeath,
+        _id
+    }`
+)
+
+export const composerFeaturedQuery = () => useState('composer-editor-pick', () =>
+    groq`*[_type == "composers" && featured == true]{
+        "name":firstName +" "+lastName,
+        firstName,
+        lastName,
         mainImage,
         excerpt,
         dateOfBirth,
