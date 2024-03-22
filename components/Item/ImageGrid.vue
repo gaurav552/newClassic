@@ -43,6 +43,7 @@ for (let i = 0; i < mixed.length ; i ++) {
                 :name="value.name"
                 :date-of-birth="value.dateOfBirth"
                 :date-of-death="value.dateOfDeath"
+                :person="value"
             />
 
             <CardWork v-else :id="value._id" :name="value.name" :alt-name="value.altName" :year="value.year" :composer="value.person" />
