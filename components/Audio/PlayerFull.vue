@@ -13,7 +13,7 @@ onMounted(() =>{
     if(!waveContainer) return;
     waveRef.value = new SiriWave({
         container: document.querySelector(".wave")!,
-        width: document.querySelector(".wave")!.clientWidth,
+        width: document.querySelector(".wave")!.clientWidth+5,
         height: 250,
         speed: 0.01,
         amplitude: 0.0,
@@ -50,7 +50,7 @@ const toggleProgressSlider = () => {
         <div class="mid" @mouseenter="toggleProgressSlider" @mouseleave="toggleProgressSlider" >
             <div class="wave" :style="showProgressSlider ?(!isWaveStarted ? 'visibility: hidden' : 'opacity: 0.1'):''"></div>
             <div class="progress" v-if="showProgressSlider">
-                <v-slider track-size="2" thumb-size="15" class="progressSlider" color="red-darken-3" v-model="progress" hide-details="auto" min="0" max="100"></v-slider>
+                <v-slider track-size="3" thumb-size="15" class="progressSlider ma-0" color="red-darken-3" v-model="progress" hide-details="auto" min="0" max="100"></v-slider>
             </div>
         </div>
         <div class="bot d-flex justify-space-between align-center pa-7">
@@ -85,17 +85,21 @@ const toggleProgressSlider = () => {
     inset: 0;
     opacity: 0.8;
     transition: opacity 0.2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -18px;
 }
 .top, .bot, .progress, .volumeSlider{
     z-index: 9999;
 }
-.progress{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 canvas{
     z-index: 1;
     pointer-events: none;
+}
+
+.v-slider.v-input--horizontal .v-slider-track{
+    height: 2px !important;
 }
 </style>
