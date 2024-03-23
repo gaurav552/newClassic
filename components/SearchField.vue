@@ -6,7 +6,7 @@ let props = defineProps({
     sortDefault:String,
     sortList: Array<Object>,
     searchQuery: String,
-    searchingMultiple: Boolean
+    searchingMultiple: String
 })
 let currentSelected = ref<string>(props.sortDefault??'')
 let currentDirection = ref('asc')
@@ -46,9 +46,9 @@ let handleSearchKeyChange = async (value:string) => {
         searching.value = true
         searchResults.value = data.value
 
-        const totalResults = props.searchingMultiple ?
-            searchResults.value.composers.length + searchResults.value.compositions.length :
-            searchResults.value.length;
+        const totalResults = props.searchingMultiple == 'Works' || props.searchingMultiple == 'Persons' ?
+            searchResults.value.length:
+            searchResults.value.composers.length + searchResults.value.compositions.length ;
 
         const successMessage = totalResults > 0 ?
             `Found ${totalResults} result${totalResults > 1 ? 's' : ''} for search term '${value}'` :
@@ -108,8 +108,8 @@ let handleSearchKeyChange = async (value:string) => {
             <v-alert class="mb-8" variant="tonal" :color="searchMgs.status" :text="searchMgs.msg"></v-alert>
             <ItemImageGrid
                 v-if="searchMgs.status == 'success'"
-                :people="searchingMultiple ? searchResults.composers : searchResults"
-                :work="searchingMultiple ? searchResults.compositions : []"
+                :people="searchingMultiple != 'Persons' && searchingMultiple != 'Works' ? searchResults.composers : (searchingMultiple == 'Persons' ? searchResults : [])"
+                :work="searchingMultiple != 'Persons' && searchingMultiple != 'Works' ? searchResults.compositions : (searchingMultiple == 'Works' ? searchResults : [])"
                 :masonry="false"
             ></ItemImageGrid>
         </div>

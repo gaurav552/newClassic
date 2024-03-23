@@ -21,8 +21,11 @@ let featuredPicks = data.value
 
 query = query.replace(' && featured == true', '')
 let {data:data2} = await sanityFetchLimited(query, 'Could not fetch Compositions')
-let allComposers = data2.value
+let allCompositions = data2.value
 
+let searching = ref(false)
+let sortList = searchSortMusic()
+let searchQuery = compositionSearchQuery().value
 
 </script>
 
@@ -38,6 +41,20 @@ let allComposers = data2.value
         <v-sheet class="bg-mySurface" style="overflow:hidden;">
             <CarouselCompositionsThumb :compositions="featuredPicks" />
         </v-sheet>
+    </div>
+
+    <SearchField
+        label="Search composers"
+        sort-default="name"
+        :sort-list="sortList"
+        @searching="searching = true"
+        @search-close="searching = false"
+        :search-query="searchQuery"
+        :searching-multiple="'Works'"
+    />
+
+    <div v-if="!searching" class="bottom w-100">
+        <ItemImageGrid :masonry="false" :work="allCompositions" :people="[]"/>
     </div>
 </template>
 

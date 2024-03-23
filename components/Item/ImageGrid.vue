@@ -30,7 +30,6 @@ for (let i = 0; i < mixed.length ; i ++) {
     i+= (cols.length - 1)
 }
 
-
 </script>
 
 <template>

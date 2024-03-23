@@ -44,7 +44,7 @@ let searchQuery = composerSearchQuery().value
         @searching="searching = true"
         @search-close="searching = false"
         :search-query="searchQuery"
-        :searching-multiple="false"
+        :searching-multiple="'Persons'"
     />
 
     <div v-if="!searching" class="bottom w-100">

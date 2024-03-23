@@ -37,7 +37,6 @@ let searchQuery = musicSearchQuery().value
         @searching="searching = true"
         @search-close="searching = false"
         :search-query="searchQuery"
-        :searching-multiple="true"
     />
 
     <div v-if="!searching" class="bottom w-100">
