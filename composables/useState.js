@@ -9,6 +9,8 @@ export const composerFields = () => useState('composer-fields', () =>
     'firstName, lastName, mainImage, dateOfBirth, dateOfDeath, _id'
 )
 
+export const isDarkMode = () => useState('dark-mode', () => true)
+
 export const composerEditorPickQuery = () => useState('composer-editor-pick', () =>
     groq`*[_type == "composers" && editorPick == true]{
         "name":firstName +" "+lastName,
@@ -25,6 +27,8 @@ export const musicEditorPicksQuery = () => useState('music-editor-pick', () =>
         "composers":*[_type == "composers" && editorPick == true]{
             "name":firstName +" "+lastName,
             mainImage,
+            firstName,
+            lastName,
             excerpt,
             dateOfBirth,
             dateOfDeath,
@@ -46,6 +50,8 @@ export const musicFeaturedQuery = () => useState('music-editor-pick', () =>
     groq`{
         "composers":*[_type == "composers" && editorPick == false && featured == true]{
             "name":firstName +" "+lastName,
+            firstName,
+            lastName,
             mainImage,
             excerpt,
             dateOfBirth,

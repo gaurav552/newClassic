@@ -5,6 +5,7 @@ const theme = useTheme()
 const route = useRouter()
 function toggleTheme() {
     theme.global.name.value = theme.global.current.value.dark ? 'myLightTheme' : 'myDarkTheme'
+    isDarkMode().value = theme.global.current.value.dark
 }
 
 const paths = ref([])

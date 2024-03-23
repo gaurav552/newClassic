@@ -1,11 +1,10 @@
 <script setup lang="ts">
-defineProps({
+let prop = defineProps({
     person:{
         type:Object,
         required: true
     }
 })
-
 </script>
 
 <template>

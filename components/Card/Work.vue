@@ -12,16 +12,23 @@ defineProps({
     instrument: String,
     genre: String,
     itemNumber: String,
-    composer: Object
+    composer: Object,
 })
 const handleClick = (id:string) => {
     navigateTo(`/music/compositions/composition-${id}`)
 }
 const {nameFormatter} = useUtilities()
+
+let gradient = ref(isDarkMode().value ? 'rgba(0,0,0,.2), rgba(0,0,0,.8)' : 'rgba(255,255,255,.2), rgba(255,255,255,.7)')
+let textClass = ref(isDarkMode().value ? 'text-white' : 'text-black')
+watch(isDarkMode(), () => {
+    gradient.value = isDarkMode().value ? 'rgba(0,0,0,.2), rgba(0,0,0,.8)' : 'rgba(255,255,255,.2), rgba(255,255,255,.7)'
+    textClass.value = isDarkMode().value ? 'text-white' : 'text-black'
+})
 </script>
 
 <template>
-    <v-card class="rounded-xl w-100" height="300px">
+    <v-card class="rounded-xl w-100 bg-mySurface" height="330px">
         <div class="d-flex h-100">
             <div class="h-100 w-66 d-flex flex-column align-center justify-center pa-5">
                 <v-card-text class="d-flex flex-column align-center justify-center ga-1">
@@ -43,14 +50,14 @@ const {nameFormatter} = useUtilities()
             <div style="width: 34%">
                 <v-img
                     :src="composer.mainImage"
-                    height="300px"
+                    height="330px"
                     width="100%"
-                    gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                    class="align-end text-grey-lighten-2"
+                    :gradient="`to bottom, ${gradient}`"
+                    :class="`px-3 py-2 align-end ${textClass}`"
                     cover
                 >
-                    <div class="right text-right py-2 d-flex align-center justify-end pa-4">
-                        <v-btn icon="mdi-heart-outline" size="small" variant="text"></v-btn>
+                    <div class="right text-right py-2 d-flex align-center justify-end pa-4 ga-3">
+                        <v-btn color="red-darken-4" icon="mdi-heart-outline" size="small" variant="tonal"></v-btn>
                         <span class="text-subtitle-2">2K likes</span>
                     </div>
                 </v-img>

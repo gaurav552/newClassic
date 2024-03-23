@@ -38,16 +38,9 @@ for (let i = 0; i < mixed.length ; i ++) {
         <v-col v-for="(value,imgIdx) in mixed" :key="imgIdx" :cols="6">
             <CardPerson
                 v-if="!value.year"
-                :id="value._id"
-                :image="value.mainImage"
-                :name="value.name"
-                :date-of-birth="value.dateOfBirth"
-                :date-of-death="value.dateOfDeath"
                 :person="value"
             />
-
             <CardWork v-else :id="value._id" :name="value.name" :alt-name="value.altName" :year="value.year" :composer="value.person" />
-
         </v-col>
     </v-row>
 </template>
