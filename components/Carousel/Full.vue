@@ -34,7 +34,7 @@ onMounted(() => {
     <g-g-carousel v-if="isClient" class="grgCarousel px-0"  :items-to-show="0.9827" :wrap-around="false" v-model="currentSlide" :wrapAround="true" :transition="500">
         <g-g-slide v-for="slide in mixed" :key="slide" class="px-3" style="height: 100%;">
             <v-card
-                class="h-100 w-100 text-white rounded-b-xl text-left bg-mySurface"
+                class="h-100 w-100 text-white text-left bg-mySurface"
                 variant="flat"
             >
                 <v-parallax
@@ -42,9 +42,7 @@ onMounted(() => {
                     :lazy-src="slide.year ? slide.person.mainImage : slide.mainImage"
                     class="rounded px-4 py-5 mb-3 h-100"
                     cover
-                    gradient="to top, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)"
                 >
-                    <v-card-title class="text-grey-lighten-1">{{ slide.year ? workName : peopleName }}</v-card-title>
                 </v-parallax>
                 <div class="px-5 pb-6 d-flex justify-space-between align-center text-myColor">
                     <div>

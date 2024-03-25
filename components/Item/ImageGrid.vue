@@ -39,7 +39,8 @@ for (let i = 0; i < mixed.length ; i ++) {
                 v-if="!value.year"
                 :person="value"
             />
-            <CardWork v-else :id="value._id" :name="value.name" :alt-name="value.altName" :year="value.year" :composer="value.person" />
+            <CardWork
+                v-else :work="value" :height="people.length == 0 ? '240px' : '330px'"/>
         </v-col>
     </v-row>
 </template>

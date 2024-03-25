@@ -97,7 +97,7 @@ export const composerEditorPickQuery = () => useState('composer-editor-pick', ()
     }`
 )
 
-export const composerFeaturedQuery = () => useState('composer-editor-pick', () =>
+export const composerFeaturedQuery = () => useState('composer-featured-queri', () =>
     groq`*[_type == "composers" && featured == true]{
         "name":firstName +" "+lastName,
         firstName,
@@ -108,6 +108,19 @@ export const composerFeaturedQuery = () => useState('composer-editor-pick', () =
         dateOfDeath,
         _id,
     }`
+)
+
+export const composerFavoriteQuery = () => useState('composer-Favorite-Query', () =>
+    groq`*[_type == "composers"] | order(likes desc, _createdAt asc){
+        "name":firstName +" "+lastName,
+        firstName,
+        lastName,
+        mainImage,
+        excerpt,
+        dateOfBirth,
+        dateOfDeath,
+        _id,
+    }[0...10]`
 )
 
 export const composerSearchQuery = () => useState('composer-search-query', () =>
@@ -143,7 +156,7 @@ export const compositionFeaturedQuery = () => useState('composition-editor-pick'
         year,
         "len":length,
         _id,
-    }`
+    }[0...10]`
 )
 export const compositionSearchQuery = () => useState('composition-search-query', () =>
     groq`*[_type == 'compositions' && [name, altName, compositionKey, description, movements, composerName->lastName, composerName->firstName] match $search] | order($sort2 asc, itemNumber asc)
@@ -155,6 +168,39 @@ export const compositionSearchQuery = () => useState('composition-search-query',
         "len":length,
         _id,
     }`
+)
+
+export const compositionAllPaginatedQuery = () => useState('composition-all-paginated-uery', () =>
+    groq`*[_type == "compositions"]{
+        name,
+        altName,
+        "person":composerName->{mainImage, firstName, lastName},
+        year,
+        "len":length,
+        _id,
+    } | order(name asc, itemNumber asc)[0...30]`
+)
+
+export const curatedMusic = () => useState('curated-music', () =>
+
+    groq`*[_type == "composers" && editorPick == true]{
+        "name":firstName +" "+lastName,
+        firstName,
+        lastName,
+        mainImage,
+        excerpt,
+        dateOfBirth,
+        dateOfDeath,
+        _id,
+        "editorPicks":*[_type == "compositions" && references(^._id) && editorPick == true]{
+            name,
+            altName,
+            year,
+            _id,
+            compositionKey,
+            length
+        } | order(name asc) 
+    } | order(name asc) [0...10]`
 )
 
 export const searchSortMusic= () => useState('music-sort', () => [

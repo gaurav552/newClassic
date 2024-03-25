@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
-let {data:editorPicks} = await sanityFetchLimited(musicEditorPicksQuery().value, 'Unable to fetch editor Picks')
-let {data:featuredPicks} = await sanityFetchLimited(musicFeaturedQuery().value, 'Unable to fetch featured Picks')
+let {data:favoriteComposers} = await sanityFetchLimited(composerFavoriteQuery().value, 'Unable to fetch favorite composers')
+let {data:editorPicks} = await sanityFetchLimited(curatedMusic().value, 'Unable to fetch Editor Picks')
 
 let headline = pageHeadline()
 let subHeadline = pageSubHeadline()
@@ -23,10 +23,10 @@ let searchQuery = musicSearchQuery().value
 </script>
 
 <template>
-    <div class="top w-100" style="height: 30%">
-        <v-card class="rounded-t-xl pa-2 w-100 mb-4 bg-mySurface text-myColor" elevation="1" title="Editor picks"></v-card>
-        <v-sheet class="bg-myBase rounded-b-xl topCarousel elevation-2 overflow-hidden">
-            <CarouselFull :people="editorPicks.composers" :works="editorPicks.compositions" people-name="Composer" work-name="Composition" />
+    <div class="top w-100 rounded-xl overflow-hidden elevation-2" style="height: 30%">
+        <v-card class="rounded-t-xl pa-2 w-100 bg-mySurface text-myColor elevation-0" title="Top Favorite Composers"></v-card>
+        <v-sheet class="bg-myBase topCarousel">
+            <CarouselFull :people="favoriteComposers" :works="[]" people-name="Composer" work-name="Composition" />
         </v-sheet>
     </div>
 
@@ -39,10 +39,12 @@ let searchQuery = musicSearchQuery().value
         :search-query="searchQuery"
     />
 
-    <div v-if="!searching" class="bottom w-100">
-        <ItemImageGrid :people="featuredPicks.composers" :work="featuredPicks.compositions" :masonry="true"/>
+    <div v-if="!searching">
+        <v-card class="pa-2 w-100 mb-3 bg-mySurface rounded-t-xl text-myColor" title="Editor Picks"></v-card>
+        <div class="bottom w-100 d-flex flex-column ga-7">
+            <CuratedContainer :class="ep === editorPicks[0] ? 'rounded-b-xl' : 'rounded-xl'" v-for="ep in editorPicks" :editor-picks="ep"/>
+        </div>
     </div>
-
     <div class="blogList d-flex flex-column rounded-xl">
         <ItemRelatedBlogs/>
     </div>

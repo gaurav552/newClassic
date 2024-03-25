@@ -1,18 +1,7 @@
 <script setup lang="ts">
 defineProps({
-    id: {
-        type:String,
-        required: true
-    },
-    name: String,
-    altName: String,
-    compositionKey: String,
-    year: String,
-    score: String,
-    instrument: String,
-    genre: String,
-    itemNumber: String,
-    composer: Object,
+    height: String,
+    work:Object
 })
 const handleClick = (id:string) => {
     navigateTo(`/music/compositions/composition-${id}`)
@@ -28,15 +17,15 @@ watch(isDarkMode(), () => {
 </script>
 
 <template>
-    <v-card class="rounded-xl w-100 bg-mySurface" height="330px">
+    <v-card class="rounded-xl w-100 bg-mySurface" :height="height ? height : '330px'">
         <div class="d-flex h-100">
             <div class="h-100 w-66 d-flex flex-column align-center justify-center pa-5">
                 <v-card-text class="d-flex flex-column align-center justify-center ga-1">
-                    <span class="text-subtitle-2">{{ nameFormatter(composer.firstName, composer.lastName) }} - {{ year }}</span>
-                    <p class="text-h5 text--primary name" @click="handleClick(id)">
-                        {{ altName ? altName : name}}
+                    <span class="text-subtitle-2">{{ nameFormatter(work.person?.firstName, work.person?.lastName) }} - {{ work.year }}</span>
+                    <p class="text-h5 text--primary name" @click="handleClick(work._id)">
+                        {{ work.altName ? work.altName : work.name}}
                     </p>
-                    <p class="text-subtitle-2 mb-6">{{ score }}</p>
+                    <p class="text-subtitle-2 mb-6">{{ work.score }}</p>
 
                     <v-card-actions>
                         <v-btn
@@ -49,7 +38,7 @@ watch(isDarkMode(), () => {
             </div>
             <div style="width: 34%">
                 <v-img
-                    :src="composer.mainImage"
+                    :src="work.person?.mainImage"
                     height="330px"
                     width="100%"
                     :gradient="`to bottom, ${gradient}`"
