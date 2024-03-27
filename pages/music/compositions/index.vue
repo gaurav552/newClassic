@@ -19,14 +19,15 @@ query = query.replace('&& editorPick == false', '')
 let {data} = await sanityFetchLimited(query, 'Could not fetch Compositions')
 let featuredPicks = data.value
 
-query = query.replace(' && featured == true', '')
-let {data:data2} = await sanityFetchLimited(query, 'Could not fetch Compositions')
+let {data:data2} = await sanityFetchLimited(compositionAllPaginatedQuery().value, 'Could not fetch Compositions')
 let allCompositions = data2.value
 
 let searching = ref(false)
 let sortList = searchSortMusic()
 let searchQuery = compositionSearchQuery().value
 
+let {data:composerGenre} = await sanityFetchLimited(groupedMusic().value, 'Could not fetch grouped music')
+// console.log(composerGenre.value)
 </script>
 
 <template>
@@ -42,7 +43,6 @@ let searchQuery = compositionSearchQuery().value
             <CarouselCompositionsThumb :compositions="featuredPicks" />
         </v-sheet>
     </div>
-
     <SearchField
         label="Search composers"
         sort-default="name"

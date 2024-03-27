@@ -8,6 +8,7 @@ export const pageBreadCrumbs = () => useState('page-crumbs', () => [])
 export const composerFields = () => useState('composer-fields', () =>
     'firstName, lastName, mainImage, dateOfBirth, dateOfDeath, _id'
 )
+export const ErrorOverlay = () => useState('error-overlay', () => '')
 
 export const isDarkMode = () => useState('dark-mode', () => true)
 
@@ -178,7 +179,7 @@ export const compositionAllPaginatedQuery = () => useState('composition-all-pagi
         year,
         "len":length,
         _id,
-    } | order(name asc, itemNumber asc)[0...30]`
+    } | order(name asc, itemNumber asc)[0...16]`
 )
 
 export const curatedMusic = () => useState('curated-music', () =>
@@ -201,6 +202,18 @@ export const curatedMusic = () => useState('curated-music', () =>
             length
         } | order(name asc) 
     } | order(name asc) [0...10]`
+)
+
+export const groupedMusic = () => useState('grouped-music', () =>
+    groq`*[_type == "composers"]{
+        firstName,
+        lastName,
+        mainImage,
+        excerpt,
+        dateOfBirth,
+        dateOfDeath,
+        "types": *[_type == "compositions" && itemNumber == 1 && references(^._id)].genre
+    } | order(firstName asc, lastName asc)[0...10]`
 )
 
 export const searchSortMusic= () => useState('music-sort', () => [

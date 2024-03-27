@@ -1,0 +1,24 @@
+<script setup lang="ts">
+    defineProps(['error'])
+</script>
+
+<template>
+    <div class="error-overlay">
+        <p>{{ error }}</p>
+    </div>
+</template>
+
+<style scoped>
+.error-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</style>
