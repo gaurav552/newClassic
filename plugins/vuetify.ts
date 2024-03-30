@@ -19,7 +19,8 @@ const myLightTheme: ThemeDefinition = {
         lighterElevation: '0 1px 15px rgba(0,0,0,.04), 0 1px 6px rgba(0,0,0,.04)',
         'medium-emphasis-opacity': 0.9,
         surface2: 'rgba(255, 255, 255, 0.75)',
-        containerShadow:'-5px 0 35px 10px rgba(100, 100, 100, 0.4);'
+        containerShadow:'-5px 0 35px 10px rgba(100, 100, 100, 0.4);',
+        transparentBG1: 'rgba(250, 250, 250, 0.5)'
     }
 }
 const myDarkTheme: ThemeDefinition = {
@@ -38,7 +39,8 @@ const myDarkTheme: ThemeDefinition = {
         lighterElevation: '0 1px 15px rgba(0,0,0,.1), 0 1px 8px rgba(0,0,0,.1)',
         'medium-emphasis-opacity': 0.9,
         surface2: 'rgba(30, 32, 34, 0.75)',
-        containerShadow:'-5px 0 35px 10px rgba(0, 0, 0, 0.45);'
+        containerShadow:'-5px 0 35px 10px rgba(0, 0, 0, 0.45);',
+        transparentBG1: 'rgba(50, 50, 50, 0.5)',
     }
 }
 export default defineNuxtPlugin((app) => {

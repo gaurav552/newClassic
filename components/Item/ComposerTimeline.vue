@@ -23,15 +23,15 @@ defineProps({
             <template v-slot:opposite>
                 <div
                     :class="`pt-1 headline font-weight-bold text-${year.color}`"
-                    v-text="year.eventDate.slice(0, 4)"
+                    v-text="year.year"
                 ></div>
             </template>
             <div>
                 <h3 :class="`mt-n1 headline mb-3 text-${year.color}`">
-                    {{ year.eventTitle[0] }}
+                    {{ year.title }}
                 </h3>
                 <p class="text-subtitle-2">
-                    {{ clipTextWithEllipsis(year.eventDescription, 130) }}
+                    {{ clipTextWithEllipsis(year.description, 130) }}
                 </p>
             </div>
         </v-timeline-item>

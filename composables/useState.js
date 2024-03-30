@@ -212,6 +212,7 @@ export const groupedMusic = () => useState('grouped-music', () =>
         excerpt,
         dateOfBirth,
         dateOfDeath,
+        _id,
         "types": *[_type == "compositions" && itemNumber == 1 && references(^._id)].genre
     } | order(firstName asc, lastName asc)[0...10]`
 )

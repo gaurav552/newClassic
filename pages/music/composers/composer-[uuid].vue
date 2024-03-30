@@ -3,10 +3,8 @@
 let route = useRoute()
 let id = route.params.uuid
 
-const {composerDetails} = useFetchComposer()
-
-const {data}:{data:ComposerData} = await fetchSanityComposer(id)
-let composer = data.value[0]
+const {data:ComposerData} = await fetchSanityComposer(id)
+let composer = ComposerData.value[0]
 
 let headline = pageHeadline()
 let subHeadline = pageSubHeadline()
@@ -31,7 +29,7 @@ crumbs.value = breadCrumbs
         </v-sheet>
 
         <div class="d-flex flex-column w-33 h-100">
-            <ItemCompositionList :composition-count="composer.numberOfCompositions" :composition-list="composer.comp"/>
+            <ItemCompositionList :composer-id="composer._id" :composition-count="composer.numberOfCompositions" :composition-list="composer.comp"/>
         </div>
     </div>
 
@@ -41,8 +39,8 @@ crumbs.value = breadCrumbs
         </v-container>
 
     </div>
-    <v-sheet class="rounded-xl pa-5">
-        <ItemComposerTimeline :timeline="composerDetails.timelineEvents" />
+    <v-sheet v-if="composer.timeline" class="rounded-xl pa-5">
+        <ItemComposerTimeline :timeline="composer.timeline" />
     </v-sheet>
 
 </template>

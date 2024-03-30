@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+import CompositionGenreList from "~/components/Item/CompositionGenreList.vue";
+
 let headline = pageHeadline()
 let subHeadline = pageSubHeadline()
 let pgIcon = pageIcon()
@@ -19,15 +21,19 @@ query = query.replace('&& editorPick == false', '')
 let {data} = await sanityFetchLimited(query, 'Could not fetch Compositions')
 let featuredPicks = data.value
 
-let {data:data2} = await sanityFetchLimited(compositionAllPaginatedQuery().value, 'Could not fetch Compositions')
-let allCompositions = data2.value
-
 let searching = ref(false)
 let sortList = searchSortMusic()
 let searchQuery = compositionSearchQuery().value
 
-let {data:composerGenre} = await sanityFetchLimited(groupedMusic().value, 'Could not fetch grouped music')
-// console.log(composerGenre.value)
+let {data:grouped} = await sanityFetchLimited(groupedMusic().value, 'Could not fetch grouped music')
+let composerGenre = grouped.value
+let tab = ref(Array(composerGenre.length).fill(''))
+let {removeDuplicate} = useUtilities()
+composerGenre.forEach((composer, i) => {
+    composerGenre[i].types = removeDuplicate(composer.types)
+})
+
+
 </script>
 
 <template>
@@ -54,7 +60,7 @@ let {data:composerGenre} = await sanityFetchLimited(groupedMusic().value, 'Could
     />
 
     <div v-if="!searching" class="bottom w-100">
-        <ItemImageGrid :masonry="false" :work="allCompositions" :people="[]"/>
+        <CompositionGenreList :composers="composerGenre"/>
     </div>
 </template>
 

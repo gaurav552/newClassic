@@ -80,12 +80,17 @@ export const useUtilities = () => {
         return result;
     }
 
+    function removeDuplicate(array:Array<String>) {
+        return [...new Set(array)];
+    }
+
     return {
         getYear,
         shuffleArrays,
         nameFormatter,
         clipTextWithEllipsis,
         generateRandomArr,
-        mixArrays
+        mixArrays,
+        removeDuplicate
     }
 }

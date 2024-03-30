@@ -1,16 +1,17 @@
 export default async (id) => {
     let query = groq`*[_type == "composers" && _id == $composerID]{
-      ...,
-        "comp": listOfCompositions[]->{
-        name,
-        altName,
-        compositionKey,
-        year,
-        score,
-        instrument,
-        genre,
-        itemNumber
-      } | order(instrument, genre, itemNumber)
+      bio,
+      firstName,
+      lastName,
+      mainImage,
+      dateOfBirth,
+      dateOfDeath,
+      _id,
+      excerpt,
+      images,
+      numberOfCompositions,
+      timeline,
+      "comp": *[_type == "compositions" && itemNumber == 1 && references(^._id)] | order(genre asc).genre
     }`
     const { data, error } = await useSanityQuery(query, { composerID: id })
 

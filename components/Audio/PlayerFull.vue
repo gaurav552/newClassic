@@ -137,7 +137,7 @@ const sliderClickOut = () => {
                     </v-list-item>
                 </v-list>
                 <v-divider/>
-                <v-list lines="two" style="height: 330px;overflow-y: scroll">
+                <v-list lines="two" class="scroll-fancy" style="height: 330px;overflow-y: auto">
                     <v-list-item
                         v-for="(item, i) in 15"
                         :key="i"
@@ -189,25 +189,5 @@ canvas{
 
 .v-slider.v-input--horizontal .v-slider-track{
     height: 2px !important;
-}
-
-/* custom scrollbar */
-::-webkit-scrollbar {
-    width: 20px;
-}
-
-::-webkit-scrollbar-track {
-    background-color: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: #d6dee1;
-    border-radius: 20px;
-    border: 6px solid transparent;
-    background-clip: content-box;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background-color: #a8bbbf;
 }
 </style>
